@@ -1,0 +1,80 @@
+ConfirmRenameButton -> Once tags have been chosen to rename an image, confirm does the changes to the image
+
+These imports are not used
+import javax.swing.Action;
+import javax.swing.Icon;
+
+PhotoRenamer variable p is short; important variables like this should be longer and clearer
+
+// TODO: Parameters of constructors?
+
+When directory is chosen with no images, IndexOutOfBoundsException error is thrown and the application crashes
+Exception in thread "AWT-EventQueue-0" java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+Happens
+	at photo_renamer.PhotoRenamer.buildImageTagger(PhotoRenamer.java:166)
+	at photo_renamer.FileChooserButtonListener.actionPerformed(FileChooserButtonListener.java:61)
+	
+When tag is added that has 0 length -> Error starts
+
+2 Times name without tags -> Same one (except there's only 1)
+
+Good job on comments
+Javadocs generally done well
+Good job privatizing, protecting variables
+Getter and setter methods are good, but should be there for all variables initialized in constructor
+Interesting approach of building a tree within PhotoNode; Alternate approach -> Make a new class that does this
+
+Instead of building tree in FileNode, could do it in FileChooserButtonListener
+	
+FileNode
+
+-> //TODO: One part: Does it have to return a list?
+
+
+Unused import -> java.util.List
+
+image_filetypes, actual_file, direct_child, key_set -> not camelCase
+
+Line 57: @return -> or null
+findChild -> Should be a better recursive structure
+
+setName -> Change to setNom
+
+Line 145 -> Description == @return description
+
+Why is buildTree in FileNode?
+Line 158 -> ls -> Bad name of important variable
+Line 160 -> Have to reinitialize type?
+buildTree -> Here can you use FileType.Image?
+
+findFileExtension doesn't have @throw in Javadoc
+Commented out code -> Lines 179-182
+Line 186 -> Don't need stop variable (break command exists for exiting while loops)
+Line 186 -> Remove variable declaration for stop, Line 189 -> Remove stop from while loop,
+Line 208 -> Replace stop with break;
+Line 183, 184 -> j and k variables are unclear (could have better names)
+Line 185 -> variable name "extension" doesn't have to be that long
+Alternate to this -> look for last index of "." by doing file.getName().lastIndexOf("."), use a substring from that to the end
+-> No need for while loop that takes O(n) time vs. substring that takes O(1) time
+
+ls -> same name used before (not descriptive again)
+No Javadoc for buildTreeWithImages() -> Should include what it does along with @throw for both exceptions
+Maybe switch if statements around (it is more likely the file that you chose is not a file, but a directory since
+you disable choosing files in your GUI
+Line 219 -> output -> can have a better name (it's also repeated everywhere like ls)
+Line 230 -> boolean isimage -> Not camelCase
+Line 239-240 -> Commented out code should be removed
+Comments in method don't have to go to next line if they don't exceed 80 characters (PEP 8)
+Line 230 -> Don't need isimage -> In the if statement at Line 233, you can assign type = FileType.PHOTO
+After for loop -> if (type == null) {type = FileType.FILE}
+Line 248, 263, 273 -> Comments spread too many lines -> If comment is short, put it on one line
+
+Line 282 -> openInFinder should have Javadoc -> Maybe doesn't need to exist, only 1 call to it in PhotoRenamer (just use absolutePath)
+
+Line 293 -> Not sure if this class is needed -> Javadoc is wrong (wrong parameter, possibly wrong description, and wrong @throws)
+
+Line 300 -> If directory doesn't exist, gives a NullPointerException
+Happens 
+	at photo_renamer.FileNode.buildTreeWithImages(FileNode.java:222)
+	at photo_renamer.FileNode.main(FileNode.java:303)
+
